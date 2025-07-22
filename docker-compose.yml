@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  app:
+    image: php:8.2-apache
+    container_name: laravel_app
+    ports:
+      - "8000:80"
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    depends_on:
+      - mysql
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+    networks:
+      - laravel
+
+    # Instala dependências do Laravel no container
+    command: >
+      bash -c "
+        apt-get update &&
+        apt-get install -y libzip-dev unzip zip libpng-dev libonig-dev curl git &&
+        docker-php-ext-install pdo pdo_mysql zip &&
+        a2enmod rewrite &&
+        apache2-foreground
+      "
+
+  mysql:
+    image: mysql:8.0
+    container_name: laravel_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: meubanco
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Gusang_20011
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - laravel
+    ports:
+      - "3306:3306"
+
+  composer:
+    image: composer:2
+    container_name: laravel_composer
+    working_dir: /var/www/html
+    volumes:
+      - ./:/var/www/html
+    networks:
+      - laravel
+    command: install
+
+volumes:
+  dbdata:
+
+networks:
+  laravel:
+    driver: bridge
