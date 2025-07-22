@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   app:
@@ -7,54 +7,34 @@ services:
     ports:
       - "8000:80"
     volumes:
-      - ./:/var/www/html
-    working_dir: /var/www/html
+      - /home/gustavo/teste_tecnico_retta:/var/www/html
+      - ./apache/000-default.conf:/etc/apache2/sites-available/000-default.conf
     depends_on:
       - mysql
     environment:
-      - APACHE_DOCUMENT_ROOT=/var/www/html/public
-    networks:
-      - laravel
-
-    # Instala dependências do Laravel no container
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_DATABASE: laravel_db
+      DB_USERNAME: laravel_user
+      DB_PASSWORD: laravel_pass
+    restart: unless-stopped
     command: >
-      bash -c "
-        apt-get update &&
-        apt-get install -y libzip-dev unzip zip libpng-dev libonig-dev curl git &&
-        docker-php-ext-install pdo pdo_mysql zip &&
-        a2enmod rewrite &&
-        apache2-foreground
-      "
+      bash -c "a2enmod rewrite && apache2-foreground"
 
   mysql:
     image: mysql:8.0
     container_name: laravel_mysql
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: meubanco
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Gusang_20011
-    volumes:
-      - dbdata:/var/lib/mysql
-    networks:
-      - laravel
     ports:
       - "3306:3306"
-
-  composer:
-    image: composer:2
-    container_name: laravel_composer
-    working_dir: /var/www/html
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: laravel_db
+      MYSQL_USER: laravel_user
+      MYSQL_PASSWORD: laravel_pass
     volumes:
-      - ./:/var/www/html
-    networks:
-      - laravel
-    command: install
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
 
 volumes:
-  dbdata:
+  mysql_data:
 
-networks:
-  laravel:
-    driver: bridge
