@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Http;
 
 class DeputadoService
 {
+   //funções para o consumo de apis 
     public function obterDeputados()
     {
         $response = Http::get('https://dadosabertos.camara.leg.br/api/v2/deputados');

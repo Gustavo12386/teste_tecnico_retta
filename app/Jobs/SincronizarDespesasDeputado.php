@@ -25,9 +25,10 @@ class SincronizarDespesasDeputado implements ShouldQueue
    
       $despesas = $service->obterDespesas($this->deputado->deputado_id);
    
-
+    //listagem das despesas
     foreach ($despesas as $despesa) {
       try{
+      //criação da job  
         $this->deputado->despesas()->updateOrCreate(
             ['cod_documento' => $despesa['codDocumento']], // chave única
             [
