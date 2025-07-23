@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('deputados', function (Blueprint $table) {
             $table->id();
+            $table->integer('deputado_id')->unique(); // ID da API
+            $table->string('nome');
+            $table->string('partido')->nullable(); // siglaPartido
+            $table->string('uf')->nullable(); // siglaUf
+            $table->integer('id_legislatura')->nullable();
+            $table->string('url_foto')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
