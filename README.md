@@ -7,54 +7,60 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## 💻 Sobre a Aplicação
+- Esta aplicação é um teste técnico solicitado pela empresa Retta, desenvolvido utilizando PHP 8.2 e o framework Laravel 12. O objetivo principal é consumir uma API que fornece informações sobre deputados e suas despesas, processando esses dados de forma sincronizada. Para garantir um processamento eficiente, foi utilizado um recurso do Laravel chamado Laravel Jobs, que permite enfileirar os dados dos deputados e executá-los em segundo plano, otimizando o desempenho da aplicação.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+ ## ✨ Tecnologias Utilizadas
+- HTML5
+- CSS3
+- Bootstrap 5.3.0
+- PHP 8.2
+- Laravel 12.0
+- Blade
+- Docker 28.3.2
+- Docker-Compose 2.38.2
+- MySQL 8.0
+ 
+## 🗒️ Roteiro
+- [ ] Configuração e execução do Docker Compose para orquestrar os containers do Composer e MySQL, além do Dockerfile para gerenciar o container PHP com o driver pdo_mysql.
+- [ ] Instalação do framework Laravel por esse comando, considerando que o PHP CLI e o Composer não estejam previamente instalados no ambiente local e sim instalado via docker-compose.
+- `docker run --rm -v $(pwd):/app composer create-project --prefer-dist laravel/laravel meuprojeto`
+- [ ] Criação dos Controllers para consumir a API, visando exibir os tipos de variáveis das informações dos deputados e das despesas, além da implementação das migrations e models correspondentes.
+- [ ] Criação do Service que vai fazer o consumo da api trazendo as informações dos deputados e das despesas.
+- [ ] Criação da Job que vai colocar os dados dos deputados em uma fila e executar em segundo plano.
+- [ ] Criação de um arquivo com o recurso Laravel Command para automatizar a inserção dos dados consumidos da API no banco de dados de forma sincronizada.
+- [ ] Execução da Job com esse comando, considerando que o PHP CLI e o Composer não estejam previamente instalados no ambiente local:
+- `docker exec -it laravel_app php artisan queue:work`
+- [ ] Execução do Arquivo com o Command para a realização da inserção, considerando que o PHP CLI e o Composer não estejam previamente instalados no ambiente local.
+- `docker exec -it laravel_app php artisan sincronizar:deputados`
+- [ ] Criação do template html com blade para realização de consulta dos deputados e suas despesas
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🚀 Como Executar
+- Clone o repositório com: `git clone https://github.com/Gustavo12386/teste_tecnico_retta.git`
+- Abra em qualquer IDE 
+- Execute o projeto com:
+- `php artisan serve`
+- Se não tiver o PHP CLI e o Composer instalados no ambiente local:
+- `docker exec -it laravel_app php artisan serve`
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Imagens do template
+<img width="1918" height="971" alt="img2" src="https://github.com/user-attachments/assets/cda332d6-8696-4228-8b6c-239f8b51abca" />
+<img width="1403" height="862" alt="img4" src="https://github.com/user-attachments/assets/0846cbe0-83a3-43ac-9a86-5263734ccefe" />
 
-## Learning Laravel
+## Imagem da Tabela de deputados
+<img width="1343" height="968" alt="img7" src="https://github.com/user-attachments/assets/308d0edd-f62a-4ee9-b3fd-fe055d61f299" />
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Imagem da Tabela de despesas
+<img width="1346" height="966" alt="img8" src="https://github.com/user-attachments/assets/07cbc40b-d576-43cc-b6b0-34950e878e40" />
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Imagem da Tabela de jobs
+<img width="1342" height="966" alt="img6" src="https://github.com/user-attachments/assets/0ccb4dff-66d2-4263-b5fe-08aa15810e69" />
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Imagem de Tabela de failed_jobs
+<img width="1347" height="964" alt="img5" src="https://github.com/user-attachments/assets/626046e1-643c-40d9-ae94-4355360f9015" />
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Autor
+- Gustavo Calderaro
 
 ## License
 
