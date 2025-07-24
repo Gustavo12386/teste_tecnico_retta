@@ -29,7 +29,6 @@ class Despesa extends Model
     'cod_lote',
     'parcela',
 ];
-
    public function deputado(){  
      return $this->belongsTo(Deputado::class);
  }

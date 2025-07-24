@@ -52,6 +52,7 @@ class SincronizarDespesasDeputado implements ShouldQueue
         );
       }  catch (\Exception $e) {
             Log::error("Erro ao salvar despesa: " . $e->getMessage());
+            throw $e;
         } 
         
     }

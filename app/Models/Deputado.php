@@ -22,7 +22,7 @@ class Deputado extends Model
 
 
 
-  public function despesas(){
+ public function despesas(){
     return $this->hasMany(Despesa::class);
  }
 }
